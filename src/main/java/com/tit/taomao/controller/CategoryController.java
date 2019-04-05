@@ -49,6 +49,7 @@ public class CategoryController {
         //2.上传图片的绝对地址到服务器
 		File imageFolder = new File(session.getServletContext().getRealPath("img/category"));
 		//File imageFolder = new File("D:\\javadata1\\image");
+		
 		System.out.println(imageFolder);
 		File file = new File(imageFolder,c.getId()+".jpg");
 		//System.out.println(file);
