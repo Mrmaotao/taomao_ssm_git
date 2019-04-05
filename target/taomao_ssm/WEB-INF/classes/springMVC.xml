@@ -9,20 +9,18 @@
  
     <!--启动注解识别-->
     <context:annotation-config/>
- 
-    <context:component-scan base-package="com.how2java.tmall.controller">
+    <context:component-scan base-package="com.tit.taomao.controller">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
- 
+
     <mvc:annotation-driven />
- 
     <!--开通静态资源的访问-->
     <mvc:default-servlet-handler />
  
     <!-- 视图定位 -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean 
+    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/jsp/" />

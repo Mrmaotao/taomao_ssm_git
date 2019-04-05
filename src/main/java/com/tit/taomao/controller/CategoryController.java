@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tit.taomao.entity.Category;
 import com.tit.taomao.service.CategoryService;
@@ -35,6 +35,7 @@ public class CategoryController {
 		model.addAttribute("cs",cs);
 		model.addAttribute("page",page);
 		return "admin/listCategory";
+
 	}
 	@RequestMapping("admin_category_add")
 	public String add(Category c,HttpSession session,UpLoadImage upLoadImage) throws Exception, IOException{
@@ -44,7 +45,7 @@ public class CategoryController {
 		File imageFolder = new File(session.getServletContext().getRealPath("img/category"));
 		System.out.println(imageFolder);
 		File file = new File(imageFolder,c.getId()+".jpg");
-		System.out.println(file);
+		//System.out.println(file);
 		if(!file.getParentFile().exists()){
 			file.getParentFile().mkdirs();
 		}
@@ -52,5 +53,43 @@ public class CategoryController {
 		BufferedImage img = ImageUtil.change2jpg(file);
 		ImageIO.write(img, "jpg", file);
 		return "redirect:/admin_category_list";
+	}
+	@RequestMapping("admin_category_delete")
+	public String delete(int id,HttpSession session){
+		categoryService.delete(id);
+		File imgageFolder = new File(session.getServletContext().getRealPath("img/category"));
+		File file = new File(imgageFolder,id+".jsp");
+		file.delete();
+		System.out.println(file);
+		return "redirect:admin_category_list";
+	}
+	
+	@RequestMapping("admin_category_edit")
+	public String get(int id ,Model model) throws IOException{
+		Category category = categoryService.get(id);
+		//System.out.println(category);
+		model.addAttribute("c", category);
+		return "admin/editCategory";
+	}
+	
+	@RequestMapping("admin_category_update")
+	public String update(Category category,HttpSession session,UpLoadImage loadImage) throws Exception, IOException{
+//		更新的是数据库中的数据
+		categoryService.update(category);
+//		获取上传的图片
+		MultipartFile image = loadImage.getImage();
+//		判断是否上传了图片，并且上传的图片不能为空
+		if(null!=image&&!image.isEmpty()){
+			File imgageFolder = new File(session.getServletContext().getRealPath("img/category"));
+			File file = new File(imgageFolder,category.getId()+".jpg");
+			image.transferTo(file);
+			System.out.println(image);
+			BufferedImage img = ImageUtil.change2jpg(file);
+			ImageIO.write(img, "jsp", file);
+			
+		}
+		
+		
+		return "redirect:admin_category_list";
 	}
 }

@@ -6,8 +6,11 @@ import com.tit.taomao.entity.Category;
 import com.tit.taomao.util.Page;
 
 public interface CategoryMapper {
-	public List<Category>list();
-	public List<Category>listPage(Page page);
-	public int total();
-	public void add(Category category);
+	 List<Category>list();
+	 List<Category>listPage(Page page);
+	 int total();
+	 void add(Category category);
+	 void delete(int id);
+	 Category get(int id);
+	 void update(Category category);
 }

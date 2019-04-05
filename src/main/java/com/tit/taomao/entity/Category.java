@@ -1,12 +1,13 @@
 package com.tit.taomao.entity;
 
+
 public class Category {
-	Integer id;
+	int id;
 	String name;
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {

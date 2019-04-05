@@ -30,4 +30,17 @@ public class CategoryServiceImpl implements CategoryService{
 	public void add(Category c) {
 		category.add(c);
 	}
+	@Override
+	public void delete(int id) {
+		category.delete(id);
+	}
+	@Override
+	public Category get(int id) {
+		return category.get(id);		
+	}
+	@Override
+	public void update(Category category1) {
+		category.update(category1);
+	}
+	
 }
