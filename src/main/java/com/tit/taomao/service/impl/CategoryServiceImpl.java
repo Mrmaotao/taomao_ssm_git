@@ -18,15 +18,6 @@ public class CategoryServiceImpl implements CategoryService{
 		return category.list();
 	}
 	@Override
-	public List<Category> list(Page page) {
-		
-		return category.listPage(page);
-	}
-	@Override
-	public int total() {
-		return category.total();
-	}
-	@Override
 	public void add(Category c) {
 		category.add(c);
 	}

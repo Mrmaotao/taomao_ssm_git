@@ -7,6 +7,7 @@
   <select id="list" resultType="Category">
     select * from   category order by id desc
   </select>
+ <!-- 
   <select id="listPage" resultType="Category">
   	select * from category order by id desc
   	<if test="start!=null and count!=null">
@@ -16,6 +17,7 @@
   <select id="total" resultType="int">
   	select count(*) from category
   </select>
+   -->
   <select id="get" resultType="Category">
     select * from category where id = #{id}
   </select>

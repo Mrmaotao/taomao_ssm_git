@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tit.taomao.entity.Category;
 import com.tit.taomao.service.CategoryService;
 import com.tit.taomao.util.ImageUtil;
@@ -27,9 +29,12 @@ public class CategoryController {
 	CategoryService categoryService;
 	@RequestMapping("admin_category_list")
 	public String list(Model model,Page page){
+		//获取分页的起始页和一页的数据数
+		PageHelper.offsetPage(page.getStart(), page.getCount());
 		//获取当前页的分类信息
-		List<Category>cs = categoryService.list(page);
-		int total = categoryService.total();
+		List<Category>cs = categoryService.list();
+		//获取从后台查出数据的总数
+		int total = (int) new PageInfo<>(cs).getTotal();
 		page.setTotal(total);
 		System.out.println("输出"+cs);
 		model.addAttribute("cs",cs);
@@ -41,8 +46,9 @@ public class CategoryController {
 	public String add(Category c,HttpSession session,UpLoadImage upLoadImage) throws Exception, IOException{
 		//1.要添加的category对象
 		categoryService.add(c);
-        //2.上传图片的绝对地址
+        //2.上传图片的绝对地址到服务器
 		File imageFolder = new File(session.getServletContext().getRealPath("img/category"));
+		//File imageFolder = new File("D:\\javadata1\\image");
 		System.out.println(imageFolder);
 		File file = new File(imageFolder,c.getId()+".jpg");
 		//System.out.println(file);

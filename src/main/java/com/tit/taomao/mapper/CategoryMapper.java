@@ -7,8 +7,8 @@ import com.tit.taomao.util.Page;
 
 public interface CategoryMapper {
 	 List<Category>list();
-	 List<Category>listPage(Page page);
-	 int total();
+//	 List<Category>listPage(Page page);
+//	 int total();
 	 void add(Category category);
 	 void delete(int id);
 	 Category get(int id);
