@@ -36,7 +36,7 @@ public class CategoryController {
 	CategoryService categoryService;
 	@RequestMapping("admin_category_list")
 	public String list(Model model,Page page){
-		//获取分页的起始页和一页的数据数
+		//获取分页的起始页和每一页的数据数
 		PageHelper.offsetPage(page.getStart(), page.getCount());
 		//获取当前页的分类信息
 		List<Category>cs = categoryService.list();
@@ -96,7 +96,7 @@ public class CategoryController {
 	public String delete(int id,HttpSession session){
 		categoryService.delete(id);
 		File imgageFolder = new File(session.getServletContext().getRealPath("img/category"));
-		File file = new File(imgageFolder,id+".jsp");
+		File file = new File(imgageFolder,id+".jpg");
 		file.delete();
 		System.out.println(file);
 		return "redirect:admin_category_list";
@@ -129,7 +129,7 @@ public class CategoryController {
 			image.transferTo(file);
 			System.out.println(image);
 			BufferedImage img = BinaryImageUtil.change2jpg(file);
-			ImageIO.write(img, "jsp", file);
+			ImageIO.write(img, "jpg", file);
             			
 		}
 		

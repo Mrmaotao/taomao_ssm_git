@@ -23,10 +23,10 @@ public class Page {
 		}
 		return pagecount;
 	}
+	
 	/*
 	 * 获取最后一页的首条记录的下标
 	 */
-	
 	public int getLastPageone(){
 		int lastone = total%count ;
 		if(lastone==0)
@@ -70,6 +70,13 @@ public class Page {
 	}
 	public void setTotal(int total) {
 		this.total = total;
+	}
+	
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
 	}
 	@Override
 	public String toString() {

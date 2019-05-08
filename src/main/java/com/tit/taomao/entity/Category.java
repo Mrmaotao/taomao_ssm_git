@@ -1,6 +1,8 @@
 package com.tit.taomao.entity;
 
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class Category {
 	int id;
 	String name;
